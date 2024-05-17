@@ -108,7 +108,7 @@ export default {
       const padding = this.type === 'icon-text' ? 'py-1.5 pl-[14px] pr-1.5' :
           this.type === 'text' ? 'py-0.5 px-1.5' : 'p-1.5'
       return [
-          this.type !== 'icon-text' ? '' : 'flex items-center',
+          this.type === 'text' ? '' : 'flex items-center',
           this.borderColor ? padding : '',
           !this.bg ? 'bg-primary-900' : '',
           this.borderRadius

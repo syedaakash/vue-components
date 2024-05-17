@@ -225,10 +225,17 @@
     <br>
     <Button
         type="icon"
-        text="Launch"
         bgType="gradient"
         bg="from-accent via-primary to-primary"
-        text-class-name="gray-100"
+        text-class-name="text-gray-100"
+    />
+    <br>
+    <br>
+    <Button
+        type="icon"
+        bgType="gradient"
+        border-color="from-accent via-primary to-primary"
+        text-class-name="text-gray-100"
     />
 
     <!--    Tooltip-->
