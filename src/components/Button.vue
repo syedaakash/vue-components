@@ -7,17 +7,17 @@
     <span :class="computedBorderClasses">
       <template v-if="type === 'icon-text'">
         <template v-if="text">
-          <span class="mr-3" :class="fontColor">
-            <Typography :text-type="textType" :class-name="className">{{text}}</Typography>
+          <span class="mr-2" :class="fontColor">
+            <Typography :text-type="textType" :class-name="computedTextClassName">{{text}}</Typography>
           </span>
         </template>
         <span class="bg-gradient-to-r from-accent-500 to-primary-500 rounded-4xl">
-            <Icon icon-name="chevron-right" size="16"/>
+            <Icon icon-name="chevron-right" size="12" class-name="sm:w-4 sm:h-4"/>
           </span>
       </template>
       <template v-else-if="type === 'text'">
         <template v-if="text">
-          <Typography :text-type="textType" :class-name="fontSize && fontColor">{{text}}</Typography>
+          <Typography :text-type="textType" :class-name="computedTextClassName">{{text}}</Typography>
         </template>
       </template>
       <template v-else-if="type === 'icon'">
@@ -39,6 +39,7 @@ export default {
       default: 'icon-text', // Options: 'icon-text', 'icon', 'text'
     },
     className: String,
+    textClassName: String,
     text: String,
     bgType: {
       type: String,
@@ -72,12 +73,13 @@ export default {
         this.borderRadius,
         'shadow-[0_4px_4px_rgba(0,0,0,0.08)]',
         'transition-all duration-500',
-        `${this.hoverBg}`,
+        this.hoverBg,
+        this.className
       ];
     },
     bgClass() {
       if (this.bgType === 'gradient') {
-        return `${this.bg} ${this.borderColor} bg-gradient-to-r hover:bg-pos-100 bg-size-200 bg-pos-0`;
+        return `${this.bg} ${this.borderColor} bg-gradient-to-r bg-size-200 bg-pos-0 hover:bg-pos-100`;
       } else if (this.bgType === 'color') {
         return `${this.bg}`;
       } else {
@@ -103,14 +105,21 @@ export default {
       }
     },
     computedBorderClasses() {
-      const padding = this.type === 'icon-text' ? 'py-2 pl-4 pr-2' :
-          this.type === 'text' ? 'py-1 px-2' : 'p-2'
+      const padding = this.type === 'icon-text' ? 'py-1.5 pl-[14px] pr-1.5' :
+          this.type === 'text' ? 'py-0.5 px-1.5' : 'p-1.5'
       return [
-          this.type !== 'icon-text' ? '' : 'inline-flex items-center',
+          this.type !== 'icon-text' ? '' : 'flex items-center',
           this.borderColor ? padding : '',
           !this.bg ? 'bg-primary-900' : '',
           this.borderRadius
           ]
+    },
+    computedTextClassName() {
+      return [
+        'text-10 leading-12',
+        'sm:text-12 sm:leading-15',
+        this.textClassName,
+      ].join(' ')
     }
   },
 };

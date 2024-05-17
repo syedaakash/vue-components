@@ -211,8 +211,7 @@
         type="icon-text"
         text="ACTION"
         bg="from-accent via-primary to-primary"
-        fontColor="text-gray-100"
-        textType="action-2"
+        text-class-name="text-gray-100 md:text-16 md:leading-20 font-bold"
     />
     <br>
     <br>
@@ -220,8 +219,7 @@
         type="icon-text"
         text="ACTION"
         border-color="from-accent via-primary to-primary"
-        fontColor="text-gray-100"
-        textType="action-2"
+        text-class-name="text-gray-100 md:text-16 md:leading-20 font-bold"
     />
     <br>
     <br>
@@ -230,7 +228,7 @@
         text="Launch"
         bgType="gradient"
         bg="from-accent via-primary to-primary"
-        fontColor="gray-100"
+        text-class-name="gray-100"
     />
 
     <!--    Tooltip-->
