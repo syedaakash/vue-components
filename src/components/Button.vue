@@ -12,7 +12,7 @@
           </span>
         </template>
         <span class="bg-gradient-to-r from-accent-500 to-primary-500 rounded-4xl">
-            <Icon icon-name="chevron-right" size="12" class-name="sm:w-4 sm:h-4"/>
+            <Icon :icon-name="iconName" size="12" class-name="sm:w-4 sm:h-4"/>
           </span>
       </template>
       <template v-else-if="type === 'text'">
@@ -21,7 +21,7 @@
         </template>
       </template>
       <template v-else-if="type === 'icon'">
-        <Icon icon-name="chevron-right" size="16"/>
+        <Icon :icon-name="iconName" size="16"/>
       </template>
     </span>
   </button>
@@ -30,6 +30,7 @@
 <script>
 import Icon from "@/components/Icon.vue";
 import Typography from "@/components/Typography.vue";
+import icon from "@/components/Icon.vue";
 export default {
   name: 'Button',
   components: {Icon, Typography},
@@ -62,8 +63,15 @@ export default {
       type: String,
       default: 'rounded-4xl'
     },
+    iconName: {
+      type: String,
+      default: 'chevron-right'
+    }
   },
   computed: {
+    icon() {
+      return icon
+    },
     computedClasses() {
       return [
         'btn',

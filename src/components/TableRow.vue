@@ -6,20 +6,24 @@
         :key="index"
         class="min-w-[136px] border-b border-primary-700"
     >
-      <span v-if="data.type==='text-pill'" class="flex items-center gap-1">
-        <Typography class-name="text-12 leading-12 font-normal text-gray-300">{{ data.value }}</Typography>
+      <span v-if="data.type==='text-pill'" class="flex items-center" :class="data.icon ? 'gap-4' : 'pl-7'">
+        <Icon v-if="data.icon" :icon-name="data.icon" size="12"/>
+        <span class="flex flex-col items-start gap-1">
         <Tag
             text="INVERTIDO"
             bg-color="bg-accent-500"
-            text-color="text-gray-900"
+            text-class-name="text-gray-900 font-bold leading-[7px]"
             border-radius="rounded-4xl"
             text-type="label-4"
         />
+        <Typography class-name="text-12 leading-12 font-bold text-gray-300 uppercase">{{ data.value }}</Typography>
+        <Typography v-if="data.label" class-name="text-8 leading-10 font-bold text-primary-300 uppercase">{{
+            data.label
+          }}</Typography>
+          </span>
       </span>
-      <span v-if="data.type==='text'">
-        <Typography class-name="text-12 leading-12 font-normal text-gray-300">{{ data.value }}</Typography>
-      </span>
-      <span v-if="data.label" class="flex flex-col items-start text-white p-2 my-1">
+      <span v-if="data.type === 'text' || (data.label && data.type === 'text')"
+            class="flex flex-col items-start text-white p-2 my-1">
         <Typography class-name="text-12 leading-12 font-normal text-gray-300">{{ data.value }}</Typography>
         <Typography v-if="data.label" class-name="text-8 leading-10 font-normal text-gray-300">{{ data.label }}</Typography>
       </span>
@@ -53,9 +57,11 @@
 import Typography from "@/components/Typography.vue";
 import Tag from "@/components/Tag.vue";
 import Button from "@/components/Button.vue";
+import Icon from "@/components/Icon.vue";
 
 export default {
   components: {
+    Icon,
     Button,
     Tag,
     Typography,

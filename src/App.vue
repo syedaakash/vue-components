@@ -1,7 +1,20 @@
 <template>
-  <div id="app" class="bg-primary-900 h-full min-h-screen p-10 pb-20">
-    <Typography text-type="title-1" class-name="text-white py-5 text-primary-200 text-center">Vue-Components
+  <div id="app">
+    <Layout>
+    <Typography text-type="title-1" class-name="text-white py-5 pt-20 text-primary-200 text-center">Vue-Components
     </Typography>
+
+<!--      Table V2-->
+      <Typography text-type="title-2" class-name="text-white py-5 text-primary-200 border-b border-primary-200 mb-10">
+        Table V2
+      </Typography>
+
+
+      <div class="overflow-hidden sm:overflow-x-auto">
+
+
+        <TableV2 :table-data="demoData"/>
+      </div>
 
     <!--    Table Row-->
     <Typography text-type="title-2" class-name="text-white py-5 text-primary-200 border-b border-primary-200 mb-10">
@@ -9,6 +22,7 @@
     </Typography>
     <TableRow :table-data="tableData"/>
     <TableRow :table-data="tableData2"/>
+    <TableRow :table-data="tableData3"/>
 
 
     <!--    Table Header-->
@@ -37,7 +51,7 @@
     <Typography text-type="title-2" class-name="text-white py-5 text-primary-200 border-b border-primary-200 mb-10">Mob
       Menu
     </Typography>
-    <MobMenu @click="onMobMenuItemClick"/>
+<!--    <MobMenu :menu-items="navbarLinks" :account-menu-links="accountMenuLinks" @click="onMobMenuItemClick"/>-->
 
     <!--    Misc-->
     <Typography text-type="title-2" class-name="text-white py-5 text-primary-200 border-b border-primary-200 mb-10">Misc
@@ -249,6 +263,7 @@
         font-color="text-gray-800"
         text-type="label-2"
     />
+    </Layout>
   </div>
 </template>
 
@@ -265,18 +280,21 @@ import Modal from "@/components/Modal.vue";
 import Card from "@/components/Card.vue";
 import Pill from "@/components/Pill.vue";
 import Misc from "@/components/Misc.vue";
-import MobMenu from "@/components/MobMenu.vue";
+// import MobMenu from "@/components/MobMenu.vue";
 import Notice from "@/components/Notice.vue";
 import TableHeader from "@/components/TableHeader.vue";
 import TableRow from "@/components/TableRow.vue";
+import Layout from "@/components/Layout.vue";
+import TableV2 from "@/components/TableV2.vue";
 
 export default {
   name: 'App',
   components: {
+    TableV2,
     TableRow,
     TableHeader,
     Notice,
-    MobMenu,
+    // MobMenu,
     Misc,
     Pill,
     Card,
@@ -287,7 +305,8 @@ export default {
     Input,
     Tag,
     RadioButton,
-    CheckBox
+    CheckBox,
+    Layout
   },
   data() {
     return {
@@ -427,6 +446,84 @@ export default {
           label: 'Últimos 7 días'
         }
       ],
+      tableHeaderCols3: [
+        {
+          key: 'producto',
+          name: 'Producto',
+          isMobile: false,
+          showOnMobile: true
+        },
+        {
+          key: 'fecha',
+          name: 'Fecha inversión',
+          icon: 'up',
+          isMobile: true,
+          showOnMobile: false
+        },
+        {
+          key: 'capital',
+          name: 'Capital invertido',
+          icon: 'up',
+          isMobile: true,
+          isDecimal: true,
+          postText: 'USDC',
+          showOnMobile: false
+        },
+        {
+          key: 'rendimientos',
+          name: 'Rendimientos',
+          icon: 'up',
+          isMobile: true,
+          isFormat: true,
+          postText: 'USDC',
+          showOnMobile: false
+        },
+        {
+          key: 'apy',
+          name: 'APY',
+          icon: 'up',
+          showOnMobile: false
+        },
+        {
+          key: 'valor',
+          name: 'Valor posición',
+          icon: 'up',
+          isMobile: true,
+          isDecimal: true,
+          postText: 'USDC',
+          showOnMobile: false
+        },
+        {
+          key: 'variación',
+          name: 'Variación posición',
+          icon: 'up',
+          isMobile: true,
+          isDecimal: true,
+          postText: 'USDC%',
+          preText: '+',
+          showOnMobile: false
+        },
+        {
+          key: 'variaciónPerc',
+          name: '% Variación posición',
+          icon: 'up',
+          showOnMobile: false
+        },
+        {
+          key: 'totalGanancias',
+          name: 'Total ganancias',
+          icon: 'up',
+          isMobile: true,
+          isFormat: true,
+          postText: 'USDC',
+          showOnMobile: true
+        },
+        {
+          name: 'VENDER TODO',
+          type: 'action',
+          showOnMobile: true
+        },
+      ],
 
       tableData: [
         {
@@ -436,6 +533,7 @@ export default {
         {
           value: 'Lorem platform',
           label: 'Lorem Chain',
+          type: 'text'
         },
         {
           value: '00.00%',
@@ -461,11 +559,14 @@ export default {
       tableData2: [
         {
           value: 'OP – USDC',
-          type: 'text-pill'
+          type: 'text-pill',
+          label: 'biswap',
+          icon: 'chevron-down'
         },
         {
           value: 'Lorem platform',
           label: 'Lorem Chain',
+          type: 'text'
         },
         {
           value: 'Inversión',
@@ -496,6 +597,126 @@ export default {
           type: 'btn-outline'
         }
       ],
+      tableData3: [
+        {
+          value: 'OP – USDC',
+          type: 'text-pill',
+          label: 'biswap',
+          icon: 'chevron-down'
+        },
+        {
+          value: 'Lorem platform',
+          label: 'Lorem Chain',
+          type: 'text'
+        },
+        {
+          value: 'Inversión',
+          type: 'text',
+        },
+        {
+          value: 'USDC 000,000,000',
+          type: 'benefit',
+        },
+        {
+          value: '00.00%',
+          type: 'percentage'
+        },
+        {
+          value: 'table-graph-purple',
+          type: 'graph'
+        },
+        {
+          value: '€000,000,000',
+          type: 'amount'
+        },
+        {
+          value: 'table-graph-yellow',
+          type: 'graph'
+        },
+        {
+          value: 'operar',
+          type: 'btn-outline'
+        }
+      ],
+
+      demoData: [
+        {
+          productId: 7,
+          producto: 'OP-WETH',
+          status: 'Completed',
+          label: 'BISWAP',
+          fecha: '31/03/2024',
+          capital: 10000.00,
+          rendimientos: 74612,
+          apy: '45%',
+          valor: 15000.00,
+          variación: 5000,
+          variaciónPerc: '50%',
+          totalGanancias: 574612,
+          totalGananciasPerc: '57%',
+        },
+        {
+          productId: 17,
+          producto: 'OP-USDC',
+          status: 'Completed',
+          label: 'BISWAP',
+          fecha: '31/03/2024',
+          capital: 10000.00,
+          rendimientos: 74612,
+          apy: '35%',
+          valor: 15000.00,
+          variación: 5000,
+          variaciónPerc: '50%',
+          totalGanancias: 574612,
+          totalGananciasPerc: '57%',
+        },
+        {
+          productId: 17,
+          producto: 'OP-USDC',
+          status: 'Completed',
+          label: 'BISWAP',
+          fecha: '28/02/2024',
+          capital: 10000.00,
+          rendimientos: 74612,
+          apy: '35%',
+          valor: 15000.00,
+          variación: 5000,
+          variaciónPerc: '50%',
+          totalGanancias: 574612,
+          totalGananciasPerc: '57%',
+        },
+        {
+          productId: 60,
+          producto: 'OP-USDT',
+          status: 'Completed',
+          label: 'BISWAP',
+          fecha: '28/02/2024',
+          capital: 10000.00,
+          rendimientos: 74612,
+          apy: '35%',
+          valor: 15000.00,
+          variación: 50000,
+          variaciónPerc: '50%',
+          totalGanancias: 574612,
+          totalGananciasPerc: '57%',
+        },
+        {
+          productId: 60,
+          producto: 'OP-USDT',
+          status: 'Completed',
+          label: 'BISWAP',
+          fecha: '28/02/2024',
+          capital: 10000.00,
+          rendimientos: 74612,
+          apy: '35%',
+          valor: 15000.00,
+          variación: 50000,
+          variaciónPerc: '50%',
+          totalGanancias: 574612,
+          totalGananciasPerc: '57%',
+        },
+      ]
+
     }
   },
   methods: {
@@ -517,11 +738,6 @@ export default {
       // Close the modal
       this.closeModal();
     },
-
-  //   Mob menu
-    onMobMenuItemClick(index) {
-      console.log(`item with index ${index} is clicked.`)
-    }
-  }
+  },
 }
 </script>

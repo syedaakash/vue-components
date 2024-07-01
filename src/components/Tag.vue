@@ -5,7 +5,7 @@
       @mouseenter="expandTag"
       @mouseleave="shrinkTag"
   >
-    <Typography v-if="isExpanded" :text-type="textType" :class-name="textColor">{{ text }}</Typography>
+    <Typography v-if="isExpanded" :text-type="textType" :class-name="textClassName">{{ text }}</Typography>
   </span>
 </template>
 
@@ -17,14 +17,14 @@ export default {
   components: {Typography},
   props: {
     className: String,
+    textClassName: {
+      type: String,
+      default: 'text-gray-700'
+    },
     text: String,
     bgColor: {
       type: String,
       default: 'bg-gray-300'
-    },
-    textColor: {
-      type: String,
-      default: 'text-gray-700'
     },
     borderRadius: {
       type: String,
